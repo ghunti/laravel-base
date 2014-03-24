@@ -1,0 +1,20 @@
+{
+    "name": "ghunti/laravel-base",
+    "description": "Some base classes and overrides for the Laravel 4 framework",
+    "authors": [
+        {
+            "name": "Gonçalo Queirós",
+            "email": "mail@goncaloqueiros.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ghunti\\LaravelBase\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
