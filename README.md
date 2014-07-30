@@ -2,7 +2,7 @@
 
 This is a packaged that brings small improvements to the [Laravel] framework.
 
-All the improvements were developed trying to use the most of the framework.
+All the improvements were made keeping in mind the Laravel way and good development practices.
 If you want to contribute don't hesitate.
 
 ## Installation
