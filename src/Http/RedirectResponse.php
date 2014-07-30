@@ -10,7 +10,7 @@ class RedirectResponse extends BaseRedirectResponse
 {
 
     /**
-     * Flash a container of errors to the session.
+     * Flash a container of messages to the session.
      *
      * @param  Illuminate\Support\Contracts\MessageProviderInterface|array  $provider
      * @return Ghunti\LaravelBase\Http\RedirectResponse
