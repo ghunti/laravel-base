@@ -20,51 +20,22 @@ abstract class BaseRepository implements RepositoryInterface
     }
 
     /**
-    * Get all of the models from the database.
-    *
-    * @param array $columns
-    * @return \Illuminate\Database\Eloquent\Collection
-    */
-    public function all($columns = array('*'))
+     * Proxy the call to the underlying model since all the work
+     * is done by it.
+     *
+     * @param  string $method    The method to invoke
+     * @param  array $arguments The arguments to pass to the method
+     * @return mixed
+     */
+    public function __call($method, $arguments)
     {
-        return $this->model->all($columns);
-    }
-
-    /**
-    * Find a model by its primary key.
-    *
-    * @param mixed $id
-    * @param array $columns
-    * @return \Illuminate\Database\Eloquent\Model|Collection
-    */
-    public function find($id, array $columns = array('*'))
-    {
-        return $this->model->find($id, $columns);
-    }
-
-    /**
-    * Find a model by its primary key or throw an exception.
-    *
-    * @param mixed $id
-    * @param array $columns
-    * @return \Illuminate\Database\Eloquent\Model|Collection
-    *
-    * @throws ModelNotFoundException
-    */
-    public function findOrFail($id = null, array $columns = array('*'))
-    {
-        return $this->model->findOrFail($id, $columns);
-    }
-
-    /**
-    * Save a new model and return the instance.
-    *
-    * @param array $attributes
-    * @return \Illuminate\Database\Eloquent\Model
-    */
-    public function create(array $attributes)
-    {
-        return $this->model->create($attributes);
+        return call_user_func_array(
+            array(
+                $this->model,
+                $method
+            ),
+            $arguments
+        );
     }
 
     /**
@@ -77,28 +48,6 @@ abstract class BaseRepository implements RepositoryInterface
     public function save(ModelInterface $model, array $options = array())
     {
         return $model->save($options);
-    }
-
-    /**
-    * Get the first record matching the attributes or create it.
-    *
-    * @param array $attributes
-    * @return \Illuminate\Database\Eloquent\Model
-    */
-    public function firstOrCreate(array $attributes)
-    {
-        return $this->model->firstOrCreate($attributes);
-    }
-
-    /**
-    * Get the first record matching the attributes or instantiate it.
-    *
-    * @param array $attributes
-    * @return \Illuminate\Database\Eloquent\Model
-    */
-    public function firstOrNew(array $attributes)
-    {
-        return $this->model->firstOrNew($attributes);
     }
 
     /**
@@ -121,17 +70,6 @@ abstract class BaseRepository implements RepositoryInterface
     public function delete(ModelInterface $model)
     {
         return $model->delete();
-    }
-
-    /**
-    * Destroy the models for the given IDs.
-    *
-    * @param array|int $ids
-    * @return int
-    */
-    public function destroy($ids)
-    {
-        return $this->model->destroy($ids);
     }
 
     /**
