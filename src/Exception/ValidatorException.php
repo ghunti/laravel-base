@@ -2,7 +2,7 @@
 
 namespace Ghunti\LaravelBase\Exception;
 
-use Illuminate\Validation\Validator;
+use Illuminate\Contracts\Validation\Validator;
 
 class ValidatorException extends \Exception
 {
