@@ -11,7 +11,7 @@ If you want to contribute don't hesitate.
 ```json
 {
     "require": {
-        "ghunti/laravel-base": "~0.1"
+        "ghunti/laravel-base": "5.0.*"
     }
 }
 ```
