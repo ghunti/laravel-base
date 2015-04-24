@@ -3,7 +3,6 @@
 namespace Ghunti\LaravelBase\ServiceProviders;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\MessageBag;
 use Ghunti\LaravelBase\Validation\Validator;
 use Ghunti\LaravelBase\Routing\Redirector;
 use Session;
@@ -51,9 +50,6 @@ class LaravelBaseServiceProvider extends ServiceProvider
                return new Validator($translator, $data, $rules, $messages);
             }
         );
-
-        //Bind messages from session to the view
-        $this->registerMessagesWithView();
     }
 
     /**
@@ -64,20 +60,5 @@ class LaravelBaseServiceProvider extends ServiceProvider
     public function provides()
     {
         return array();
-    }
-
-    /**
-     * Same logic provided by ViewServiceProvider::registerSessionBinder to bind
-     * the messages from session to the view.
-     * If 'messages' exist in the session, a variable $messages will be inserted into the view.
-     * If no 'messages' exist on the session an empty MessageBag is inserted
-     */
-    protected function registerMessagesWithView()
-    {
-        if ($messageBag = Session::get('messages')) {
-            $this->app->view->share('messages', $messageBag);
-        } else {
-            $this->app->view->share('messages', new MessageBag);
-        }
     }
 }

@@ -16,6 +16,14 @@ If you want to contribute don't hesitate.
 }
 ```
 
+Add the following middleware to the app/Http/Middleware:
+```php
+protected $middleware = [
+    ...<other middleware>...,
+    'Ghunti\LaravelBase\Middleware\ShareMessagesFromSession',
+];
+```
+
 ## Features
 
 ### Permission Denied Exception
