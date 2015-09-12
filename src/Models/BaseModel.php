@@ -4,6 +4,7 @@ namespace Ghunti\LaravelBase\Models;
 
 use Ghunti\LaravelBase\Interfaces\ValidationRulesProviderInterface;
 use Ghunti\LaravelBase\Interfaces\ModelInterface;
+use Ghunti\LaravelBase\Eloquent\BaseBuilder;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseModel extends Model implements ValidationRulesProviderInterface, ModelInterface
@@ -18,6 +19,17 @@ abstract class BaseModel extends Model implements ValidationRulesProviderInterfa
     public function getValidationRules()
     {
         return $this->exists ? $this->getEditRules() : $this->getCreateRules();
+    }
+
+    /**
+     * Create a new Eloquent query builder for the model.
+     *
+     * @param  \Illuminate\Database\Query\Builder $query
+     * @return \Ghunti\LaravelBase\Eloquent\BaseBuilder
+     */
+    public function newEloquentBuilder($query)
+    {
+        return new BaseBuilder($query);
     }
 
     /**

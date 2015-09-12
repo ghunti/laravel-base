@@ -4,6 +4,7 @@ namespace Ghunti\LaravelBase\Repositories;
 
 use Ghunti\LaravelBase\Interfaces\RepositoryInterface;
 use Ghunti\LaravelBase\Interfaces\ModelInterface;
+use Ghunti\LaravelBase\Eloquent\BaseBuilder;
 
 abstract class BaseRepository implements RepositoryInterface
 {
@@ -29,13 +30,22 @@ abstract class BaseRepository implements RepositoryInterface
      */
     public function __call($method, $arguments)
     {
-        return call_user_func_array(
-            array(
-                $this->model,
-                $method
-            ),
-            $arguments
-        );
+        //Does the model know how to handle this?
+        if (method_exists($this->model, $method)) {
+            return call_user_func_array(
+                array(
+                    $this->model,
+                    $method
+                ),
+                $arguments
+            );
+        }
+
+        //Mimic the behavior of Eloquent\Model::__call but also inject the
+        //repository into the query builder
+        $queryBuilder = $this->model->newQuery();
+        $queryBuilder->setRepository($this);
+        return call_user_func_array([$queryBuilder, $method], $arguments);
     }
 
     /**

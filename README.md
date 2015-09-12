@@ -149,6 +149,8 @@ public function allOrderedByName($direction = 'asc')
 }
 ```
 
+[Scopes] are also supported by the base repository, so you can code the scopes in your repository instead of the model
+
 License
 ----
 
@@ -161,3 +163,4 @@ MIT
 [errors]:http://laravel.com/docs/validation#error-messages-and-views
 [Models/BaseModel.php]:src/Models/BaseModel.php
 [Repositories/BaseRepository.php]:src/Repositories/BaseRepository.php
+[Scopes]:http://laravel.com/docs/master/eloquent#query-scopes
