@@ -25,7 +25,7 @@ class LaravelBaseServiceProvider extends ServiceProvider
     public function register()
     {
         //Override Laravel Redirect
-        $this->app->bindShared(
+        $this->app->singleton(
             'redirect',
             function ($app) {
                 $redirector = new Redirector($app->url);

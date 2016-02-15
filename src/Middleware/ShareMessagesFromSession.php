@@ -3,11 +3,10 @@
 namespace Ghunti\LaravelBase\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Support\MessageBag;
 use Illuminate\Contracts\View\Factory as ViewFactory;
 
-class ShareMessagesFromSession implements Middleware
+class ShareMessagesFromSession
 {
     /* Create a new error binder instance.
      *
