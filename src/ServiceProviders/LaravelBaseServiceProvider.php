@@ -46,8 +46,8 @@ class LaravelBaseServiceProvider extends ServiceProvider
     {
         //Extend the Validator
         $this->app->validator->resolver(
-            function ($translator, $data, $rules, $messages) {
-               return new Validator($translator, $data, $rules, $messages);
+            function ($translator, $data, $rules, $messages, $customAttributes) {
+               return new Validator($translator, $data, $rules, $messages, $customAttributes);
             }
         );
     }
